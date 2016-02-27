@@ -3,7 +3,7 @@ from Citadel.models import NewsMessage
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from forms import UserForm, UserProfile, UserProfForm, User
+from forms import UserForm, UserProfForm, UserLogin
 from django.http import HttpResponse
 
 # Create your views here.
@@ -52,44 +52,22 @@ def register(request):
             {'user_form': user_form, 'user_prof_form': user_prof_form, 'registered': registered} )
 
 def usrlogin(request):
-    # If the request is a HTTP POST, try to pull out the relevant information.
     if request.method == 'POST':
-        # Gather the username and password provided by the user.
-        # This information is obtained from the login form.
-                # We use request.POST.get('<variable>') as opposed to request.POST['<variable>'],
-                # because the request.POST.get('<variable>') returns None, if the value does not exist,
-                # while the request.POST['<variable>'] will raise key error exception
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        # Use Django's machinery to attempt to see if the username/password
-        # combination is valid - a User object is returned if it is.
-        user = authenticate(username=username, password=password)
-
-        # If we have a User object, the details are correct.
-        # If None (Python's way of representing the absence of a value), no user
-        # with matching credentials was found.
-        if user:
-            # Is the account active? It could have been disabled.
-            if user.is_active:
-                # If the account is valid and active, we can log the user in.
-                # We'll send the user back to the homepage.
-                login(request, user)
-                return HttpResponseRedirect('/')
+        user_login = UserLogin(data=request.POST)
+        if (user_login.is_valid()):
+            user = authenticate(user_login.userName, user_login.password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/')
+                else:
+                    return HttpResponse("")
             else:
-                # An inactive account was used - no logging in!
-                return HttpResponse("")
+                return HttpResponse("Invalid login details supplied.")
         else:
-            # Bad login details were provided. So we can't log the user in.
-            print "Invalid login details: {0}, {1}".format(username, password)
-            return HttpResponse("Invalid login details supplied.")
-
-    # The request is not a HTTP POST, so display the login form.
-    # This scenario would most likely be a HTTP GET.
+            print user_login.errors
     else:
-        # No context variables to pass to the template system, hence the
-        # blank dictionary object...
-        return render(request, 'Citadel/login.html', {})
+        return render(request, 'Citadel/login.html', {"user_login" : UserLogin()})
 
 
 def user_profile(request):
