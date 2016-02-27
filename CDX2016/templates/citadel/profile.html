@@ -8,9 +8,9 @@
     <a class="button" href="/logout">Log Out</a>
     <ul>
     {% if user.is_authenticated %}
-        <h1>Hello, {{profile_details.name}}, {{profile_details.surname}}</h1>        
+        <h1>Hello, {{name}} {{surname}}</h1>        
         <br>
-        <h2>Ballance: </h2>
+        <h2>Balance: {{balance}}</h2>
 
 
     {% endif %}

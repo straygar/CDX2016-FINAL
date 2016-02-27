@@ -86,3 +86,17 @@ def user_logout(request):
 
     # Take the user back to the homepage.
     return HttpResponseRedirect('/')
+
+def user_profile(request):
+    current_user = request.user
+    u = UserProfile.objects.all().filter(user = request.user)[0]
+    b = BankingDetails.objects.all().filter(user = u)[0]
+
+    context_dict = {'name': u.name,
+                    'surname': u.surname,
+                    'balance': b.Balance}
+    return render(request, 'Citadel/profile.html', context_dict)
+    u = UserProfile.objects.filter(user == current_user)
+    print u
+#    context_dict = {'profile_details' = u}
+    return render(request, 'citadel/profile.html', context_dict)
