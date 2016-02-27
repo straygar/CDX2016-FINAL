@@ -67,7 +67,7 @@ def usrlogin(request):
         else:
             print user_login.errors
     else:
-        return render(request, 'Citadel/login.html', {"user_login" : UserLogin()})
+        return render(request, 'citadel/login.html', {"user_login" : UserLogin()})
     return HttpResponseRedirect("/Citadel/")
 
 
@@ -76,7 +76,7 @@ def user_profile(request):
     u = UserProfile.objects.filter(user == current_user)
     print u
 #    context_dict = {'profile_details' = u}
-    return render(request, 'Citadel/profile.html', context_dict)
+    return render(request, 'citadel/profile.html', context_dict)
 
 
 
@@ -88,6 +88,7 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect('/')
 
+@login_required
 def user_profile(request):
     current_user = request.user
     u = UserProfile.objects.all().filter(user = request.user)[0]
@@ -96,7 +97,7 @@ def user_profile(request):
     context_dict = {'name': u.name,
                     'surname': u.surname,
                     'balance': b.Balance}
-    return render(request, 'Citadel/profile.html', context_dict)
+    #return render(request, 'citadel/profile.html', context_dict)
     u = UserProfile.objects.filter(user == current_user)
     print u
 #    context_dict = {'profile_details' = u}

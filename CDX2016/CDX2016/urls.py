@@ -21,7 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^Citadel/', index),
-    url(r'^accounts/login/', usrlogin),
     url(r'^register/continue/', register),
     url(r'^register/', registerFirst),
     url(r'^login/', usrlogin),
