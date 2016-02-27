@@ -88,7 +88,14 @@ def usrlogin(request):
 
 
 def user_profile(request):
-    return render(request,'citadel/profile.html')
+    current_user = request.user
+    u = UserProfile.objects.filter(user == current_user)
+    print u
+    context_dict = {'profile_details' = u}
+    return render(request, 'Citadel/profile.html', context_dict)
+
+
+
 @login_required
 def user_logout(request):
     # Since we know the user is logged in, we can now just log them out.

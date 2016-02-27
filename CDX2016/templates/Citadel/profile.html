@@ -4,12 +4,13 @@
 {% load staticfiles %}
 
 {% block bodyblock %}
-    <a class="button" href="/index">Home</a>
+    <a class="button" href="/">Home</a>
     <a class="button" href="/logout">Log Out</a>
     <ul>
     {% if user.is_authenticated %}
-        <h1>{{ user.name }}</h1>        
-
+        <h1>Hello, {{profile_details.name}}, {{profile_details.surname}}</h1>        
+        <br>
+        <h2>Ballance: </h2>
 
 
     {% endif %}
