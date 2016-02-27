@@ -26,7 +26,7 @@ def add_user(lastname,firstname,balance,count):
     usernamestring = firstname + lastname + str(count)
     print usernamestring
     u.username = usernamestring
-    u.password = make_random_password(15)
+    u.password = os.urandom(15)
     u.save()
     c = UserProfile.objects.create(user=u)
     c.name = firstname
