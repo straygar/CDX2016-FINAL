@@ -55,7 +55,7 @@ def usrlogin(request):
     if request.method == 'POST':
         user_login = UserLogin(data=request.POST)
         if (user_login.is_valid()):
-            user = authenticate(user_login.userName, user_login.password)
+            user = authenticate(username=user_login.cleaned_data["username"], password=user_login.cleaned_data["password"])
             if user:
                 if user.is_active:
                     login(request, user)
@@ -68,6 +68,7 @@ def usrlogin(request):
             print user_login.errors
     else:
         return render(request, 'Citadel/login.html', {"user_login" : UserLogin()})
+    return HttpResponseRedirect("/Citadel/")
 
 
 def user_profile(request):
