@@ -27,4 +27,9 @@ urlpatterns = [
     url(r'^login/', usrlogin),
     url(r'^profile/', user_profile),
     url(r'^logout/', user_logout),
+    url(r'^captcha/', include('captcha.urls')),
 ]
+
+urlpatterns += patterns('',
+    url(r'^captcha/', include('captcha.urls')),
+)

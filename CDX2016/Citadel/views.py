@@ -31,13 +31,15 @@ def register(request):
     if request.method == 'POST':
         user_form = UserForm(data=request.POST)
         user_prof_form = UserProfForm(data=request.POST)
-        print user_prof_form
         if user_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user_prof_form.save()
-            user.save()
-            registered = True
+            if (user_prof_form.is_valid()):
+                user = user_form.save()
+                user.set_password(user.password)
+                user_prof_form.save()
+                user.save()
+                registered = True
+            else:
+                print user_prof_form.errors
         else:
             print user_form.errors
     else:
