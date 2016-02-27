@@ -21,6 +21,8 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect('/Citadel/')
 
+def registerFirst(request):
+    return render(request, 'citadel/registerFirst.html', {})
 
 def register(request):
 
@@ -92,7 +94,7 @@ def user_profile(request):
     current_user = request.user
     u = UserProfile.objects.filter(user == current_user)
     print u
-    context_dict = {'profile_details' = u}
+#    context_dict = {'profile_details' = u}
     return render(request, 'Citadel/profile.html', context_dict)
 
 
