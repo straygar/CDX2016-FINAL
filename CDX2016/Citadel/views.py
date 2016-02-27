@@ -89,11 +89,12 @@ def usrlogin(request):
     else:
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
-        return render(request, 'Citadel/login.html', {})
+        return render(request, 'citadel/login.html', {})
 
 
 def user_profile(request):
     current_user = request.user
+<<<<<<< HEAD
     u = UserProfile.objects.all().filter(user = request.user)[0]
     b = BankingDetails.objects.all().filter(user = u)[0]
 
@@ -101,6 +102,12 @@ def user_profile(request):
                     'surname': u.surname,
                     'balance': b.Balance}
     return render(request, 'Citadel/profile.html', context_dict)
+=======
+    u = UserProfile.objects.filter(user == current_user)
+    print u
+#    context_dict = {'profile_details' = u}
+    return render(request, 'citadel/profile.html', context_dict)
+>>>>>>> eb7f2bc951437006a60fcdbdcd94a8d4bc3486e9
 
 
 
