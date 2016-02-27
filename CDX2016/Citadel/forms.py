@@ -20,10 +20,7 @@ class UserProfForm(forms.ModelForm):
         model = UserProfile
         fields = ("name", "surname",)
 
-class UserLogin(forms.ModelForm):
-    username = forms.CharField(widget=forms.TextInput(), required=True, label="Username")
+class UserLogin(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(), required=True, label="Username", max_length=2)
     password = forms.CharField(widget=forms.PasswordInput(), required=True, label="Password")
     captcha = CaptchaField(required=True, label="Verify you are not a robot")
-    class Meta:
-        model = User
-        fields = ('username', 'password',)

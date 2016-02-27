@@ -54,10 +54,8 @@ def register(request):
 def usrlogin(request):
     if request.method == 'POST':
         user_login = UserLogin(data=request.POST)
-        print user_login
-        #if (user_login.is_valid()):
-        if (True):
-            user = authenticate(username=user_login.data["username"], password=user_login.data["password"])
+        if (user_login.is_valid()):
+            user = authenticate(username=user_login.cleaned_data["username"], password=user_login.cleaned_data["password"])
             if user:
                 if user.is_active:
                     login(request, user)
