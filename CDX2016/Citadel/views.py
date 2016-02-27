@@ -54,8 +54,10 @@ def register(request):
 def usrlogin(request):
     if request.method == 'POST':
         user_login = UserLogin(data=request.POST)
-        if (user_login.is_valid()):
-            user = authenticate(username=user_login.cleaned_data["username"], password=user_login.cleaned_data["password"])
+        print user_login
+        #if (user_login.is_valid()):
+        if (True):
+            user = authenticate(username=user_login.data["username"], password=user_login.data["password"])
             if user:
                 if user.is_active:
                     login(request, user)
@@ -64,8 +66,8 @@ def usrlogin(request):
                     return HttpResponse("")
             else:
                 return HttpResponse("Invalid login details supplied.")
-        else:
-            print user_login.errors
+        #else:
+            #print user_login.errors
     else:
         return render(request, 'Citadel/login.html', {"user_login" : UserLogin()})
     return HttpResponseRedirect("/Citadel/")
