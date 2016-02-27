@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block bodyblock %}
+    <a class="button" href="/index">Home</a>
+    <a class="button" href="/logout">Log Out</a>
+    <ul>
+    {% if user.is_authenticated %}
+        <h1>{{ user.name }}</h1>        
+
+
+
+    {% endif %}
+    </ul>
+{% endblock %}
