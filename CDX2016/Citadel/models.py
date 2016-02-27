@@ -2,18 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from re import sub
 
-class StringSecurity:
-    regex_expr_message = "[^A-Za-z0-9.,-_?! ]"
-    regex_expr_usn = "[^A-Za-z0-9]"
+regex_expr_message = "[^A-Za-z0-9.,-_?! ]"
+regex_expr_usn = "[^A-Za-z0-9]"
 
-    def removeCharactersMessage(self, string):
-        return sub(self.regex_expr_message, "", string)
+def removeCharactersMessage(string):
+    return sub(regex_expr_message, "", string)
 
-    def removeCharactersUSN(self, string):
-        return sub(self.regex_expr_usn, "", string)
+def removeCharactersUSN(string):
+    return sub(regex_expr_usn, "", string)
 
-
-# Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(
         User,
@@ -24,7 +21,8 @@ class UserProfile(models.Model):
     surname = models.CharField(max_length=128, unique=False)
 
     def save(self, *args, **kwargs):
-        self.name = StringSecurity.removeCharactersUSN(self.name)
+        self.name = removeCharactersUSN(self.name)
+        super(UserProfile, self).save(*args, **kwargs)
 
 class BankingDetails(models.Model):
     user = models.OneToOneField(
@@ -40,5 +38,5 @@ class NewsMessage(models.Model):
     message = models.CharField(max_length=2048, unique=False)
     time = models.DateTimeField(auto_now=True)
     def save(self, *args, **kwargs):
-        self.message = StringSecurity.removeCharactersMessage(self.message)
+        self.message = removeCharactersMessage(self.message)
         super(NewsMessage, self).save(*args, **kwargs)
