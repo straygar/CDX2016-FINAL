@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+from django.conf.urls import url, include, patterns
 from django.contrib import admin
 from Citadel.views import *
 
@@ -27,7 +27,6 @@ urlpatterns = [
     url(r'^login/', usrlogin),
     url(r'^profile/', user_profile),
     url(r'^logout/', user_logout),
-    url(r'^captcha/', include('captcha.urls')),
 ]
 
 urlpatterns += patterns('',
