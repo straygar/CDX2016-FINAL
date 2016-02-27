@@ -3,7 +3,7 @@ from Citadel.models import NewsMessage
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from forms import UserForm, UserProfile, UserProfForm, User
+from forms import UserForm, UserProfile, UserProfForm, User, BankingDetails
 from django.http import HttpResponse
 
 # Create your views here.
@@ -94,9 +94,12 @@ def usrlogin(request):
 
 def user_profile(request):
     current_user = request.user
-    u = UserProfile.objects.filter(user == current_user)
-    print u
-#    context_dict = {'profile_details' = u}
+    u = UserProfile.objects.all().filter(user = request.user)[0]
+    b = BankingDetails.objects.all().filter(user = u)[0]
+
+    context_dict = {'name': u.name,
+                    'surname': u.surname,
+                    'balance': b.Balance}
     return render(request, 'Citadel/profile.html', context_dict)
 
 
