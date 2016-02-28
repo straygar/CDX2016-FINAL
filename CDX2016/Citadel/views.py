@@ -40,6 +40,8 @@ def register(request):
                 user_profile = user_prof_form.save(commit=False)
                 user_profile.user = user
                 user_profile.save()
+                bd = BankingDetails(user=user_profile, Balance=0.0)
+                bd.save()
                 registered = True
             else:
                 print user_prof_form.errors

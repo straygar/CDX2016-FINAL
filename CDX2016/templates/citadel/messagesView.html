@@ -7,8 +7,15 @@
     <div>
         {% if messages %}
             <table>
+                <th>
+                    <td>Posted by</td>
+                    <td>Message</td>
+                </th>
                 {% for message in messages %}
-
+                <tr>
+                    <td>{{ message.poster }}</td>
+                    <td>{{ message.message }}</td>
+                </tr>
                 {% endfor %}
             </table>
         {% else %}
