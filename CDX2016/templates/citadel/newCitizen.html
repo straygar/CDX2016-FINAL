@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block bodyblock %}
+
+<div class="container content">
+    {% if edit_c %}
+        <h1>New citizen</h1>
+        <h5>Produce a new citizen for your kingdom</h5>
+        <form action="." method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ edit_c.as_p }}
+            <input type="submit" name="submit" value="Confirm" />
+            <a href="/citizens/" class="button">Cancel</a>
+        </form>
+    {% else %}
+        <p>Something has gone wrong. Please, <a href="/">press here to go to the homepage.</a></p>
+    {% endif %}
+</div>
+{% endblock %}

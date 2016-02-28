@@ -6,6 +6,9 @@
 
     <div class="container content">
         {% if is_logged_in %}
+            <div class="full_button">
+                <a href="/citizens/make/" class="button full_button_inner">Produce a new Citizen</a>
+            </div>
             <h2>People list</h2>
             <h5>See all your citizens and manage them at your will</h5>
             {% if citizens %}

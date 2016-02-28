@@ -5,8 +5,8 @@
     <h1>Register</h1>
 
         {% if registered %}
-        Registered
-        <a href="/">Return to the homepage.</a>
+        You registered correctly. You need administrator approval before you can login.
+        <a href="/" class="button">Return to the homepage.</a>
             <br/>
         {% else %}
         <form id="user_form" method="post" action="/register/continue/"

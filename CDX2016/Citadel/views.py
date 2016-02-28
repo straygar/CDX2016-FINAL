@@ -119,6 +119,18 @@ def editCitizen(request, citid):
     return render(request, "citadel/citizenEdit.html", {"edit_c":form})
 
 @login_required
+def makeCitizen(request):
+    if request.method == "POST":
+        form = CitizenForm(data=request.POST)
+        if form.is_valid():
+            formData = form.save()
+            formData.save()
+            return HttpResponseRedirect("/citizens/")
+    else:
+        form = CitizenForm()
+    return render(request, "citadel/newCitizen.html", {"edit_c":form})
+
+@login_required
 def deleteCitizens(request,citid):
     if request.method == "POST":
         BankingDetails.objects.get(id=citid).delete()
