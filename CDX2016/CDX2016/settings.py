@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-#from rango.models import NewsMessage
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,7 +31,6 @@ STATICFILES_DIRS = [STATIC_PATH]
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -45,8 +43,8 @@ INSTALLED_APPS = [
 REGISTRATION_OPEN = False                # If True, users can register
 ACCOUNT_ACTIVATION_DAYS = 1             # One-day activation window; you may, of course, use a different value.
 REGISTRATION_AUTO_LOGIN = False          # If True, the user will be automatically logged in.
-LOGIN_REDIRECT_URL = '/Citadel/'          # The page you want users to arrive at after they successful log in
-LOGIN_URL = '/Citadel/login/'          # The page users are directed to if they are not logged in,
+LOGIN_REDIRECT_URL = '/'          # The page you want users to arrive at after they successful log in
+LOGIN_URL = '/login/'          # The page users are directed to if they are not logged in,
                                         # and are trying to access pages requiring authenticatio
 
 

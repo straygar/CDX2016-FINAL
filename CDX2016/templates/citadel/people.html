@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block bodyblock %}
+
+    {% if user.is_authenticated %}
+        <h1>Hello, {{name}} {{surname}}</h1>
+        <br>
+        <h2>Balance: {{balance}}</h2>
+    {% else %}
+        <h1>You are not authorized to do this!</h1>
+    {% endif %}
+{% endblock %}

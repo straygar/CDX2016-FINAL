@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/skeleton.css' %}">
-
+<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png" />
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
 			<ul>
 
 				<li><a href="/">Home</a></li>
-				<li><a href="/Citadel/messagesView">Message Board</a></li>
+				<li><a href="/messages/">Message Board</a></li>
 			{% if user.is_authenticated %}
 				<li><a href="/profile">Profile</a></li>
 				<li><a href="/logout">Log Out</a></li>
@@ -35,7 +35,7 @@
 	</div>
 </header>
 <footer>
-	<div class="container">loool</div>
+	<div class="container footer	">Dodgy, insecure, slow - What a bank should be  |  &copy; Dodgybank 2016</div>
 </footer>
 
 

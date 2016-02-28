@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Citadel.models import NewsMessage, UserProfile, BankingDetails
+from Citadel.models import NewsMessage, UserProfile, BankingDetails, removeCharactersMessage
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -18,7 +18,7 @@ def user_logout(request):
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('/Citadel/')
+    return HttpResponseRedirect('/')
 
 def registerFirst(request):
     return render(request, 'citadel/registerFirst.html', {})
@@ -34,6 +34,7 @@ def register(request):
             if (user_prof_form.is_valid()):
                 user = user_form.save(commit=False)
                 user.set_password(user.password)
+                user.is_active=False
                 user.save()
                 user_profile = user_prof_form.save(commit=False)
                 user_profile.user = user
@@ -62,14 +63,13 @@ def usrlogin(request):
                     login(request, user)
                     return HttpResponseRedirect('/')
                 else:
-                    return HttpResponse("")
+                    return HttpResponse("Your user has not yet been approved by an administrator.")
             else:
-                return HttpResponse("Invalid login details supplied.")
-        #else:
-            #print user_login.errors
+                return HttpResponse("Invalid login details supplied!")
     else:
-        return render(request, 'citadel/login.html', {"user_login" : UserLogin()})
-    return HttpResponseRedirect("/Citadel/")
+        user_login = UserLogin()
+
+    return render(request, 'citadel/login.html', {"user_login" : user_login})
 
 @login_required
 def user_logout(request):
@@ -94,7 +94,10 @@ def user_profile(request):
 
 def messageView(request):
     news = NewsMessage.objects.order_by('-time')
-    return render(request, 'citadel/messagesView.html', {"messages":news})
+    for new in news:
+        new.title = removeCharactersMessage(new.title)
+        new.message = removeCharactersMessage(new.message)
+    return render(request, 'citadel/messagesView.html', {"messages":news, "is_logged_in":request.user.is_authenticated()})
 
 @login_required
 def addMessage(request):
@@ -103,9 +106,8 @@ def addMessage(request):
         if messageForm.is_valid():
             message = messageForm.save(commit=False)
             message.poster = request.user
+            message.save()
             return HttpResponseRedirect("/messages/")
-        else:
-            pass
     else:
         messageForm = MessageForm()
 

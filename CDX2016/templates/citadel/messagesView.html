@@ -5,6 +5,9 @@
 {% block bodyblock %}
 
     <div class="container content">
+        {% if is_logged_in %}
+            <a class="button" href="/messages/add-message/">Add a new message</a>
+        {% endif %}
         {% if messages %}
             <table>
                 <tr>

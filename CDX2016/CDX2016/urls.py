@@ -18,9 +18,7 @@ from django.contrib import admin
 from Citadel.views import *
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     url(r'^$', index),
-    url(r'^Citadel/', index),
     url(r'^register/continue/', register),
     url(r'^register/', registerFirst),
     url(r'^login/', usrlogin),
