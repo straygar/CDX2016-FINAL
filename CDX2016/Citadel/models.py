@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from re import sub
 
-regex_expr_message = "[^A-Za-z0-9.,\-_?! ]"
+regex_expr_message = "[^A-Za-z0-9.,\-_?!'/+* ]"
 regex_expr_usn = "[^A-Za-z0-9]"
 regex_expr_names = "[^A-Za-z0-9 ]"
 
