@@ -9,28 +9,35 @@
     <title>Citadel</title>
 </head>
 <body>
-{% block bodyblock %}
+{% block bodyblock %}{% endblock %}
 <header>
 	<div class="container" id="header">
 		<div class="companyName">
 			<a href="/">
-				<img id="logo" src="static/images/logo.png" alt="Logo">
+				<img id="logo" src="/static/images/logo.png" alt="Logo">
 				DodgyBank
 			</a>
 		</div>
 		<div class="navbar">
 			<ul>
-				<li>Home</li>
-				<li>Message Board </li>
-				<li>Sign In</li>
+
+				<li><a href="/">Home</a></li>
+				<li><a href="/Citadel/messagesView">Message Board</a></li>
+			{% if user.is_authenticated %}
+				<li><a href="/profile">Profile</a></li>
+				<li><a href="/logout">Log Out</a></li>
+			{% else %}
+				<li><a href="/register">Register</a></li>
+				<li><a href="/login">Sign In</a></li>
+			{% endif %}
 			</ul>
 		</div>			
 	</div>
 </header>
 <footer>
-	loool
+	<div class="container">loool</div>
 </footer>
-{% endblock %}
+
 
 </body>
 </html>

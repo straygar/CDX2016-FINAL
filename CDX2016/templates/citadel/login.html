@@ -3,10 +3,12 @@
 {% load staticfiles %}
 
 {% block bodyblock %}
-<form id="login_form" method="post" action="/login/" enctype="multipart/form-data">
-    {% csrf_token %}
+<div class="container content">
+	<form id="login_form" method="post" action="/login/" enctype="multipart/form-data">
+		{% csrf_token %}
 
-    {{ user_login.as_p }}
-    <input type="submit" name="submit" value="Login" />
-</form>
+		{{ user_login.as_p }}
+		<input type="submit" name="submit" value="Login" />
+	</form>
+</div>
 {% endblock %}

@@ -3,7 +3,7 @@ from Citadel.models import NewsMessage, UserProfile, BankingDetails
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from forms import UserForm, UserProfForm, UserLogin
+from forms import UserForm, UserProfForm, UserLogin, MessageForm
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
@@ -79,7 +79,7 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect('/')
 
-#@login_required
+@login_required
 def user_profile(request):
     current_user = request.user
     if current_user.is_authenticated:
@@ -95,3 +95,21 @@ def user_profile(request):
 def messageView(request):
     news = NewsMessage.objects.order_by('-time')
     return render(request, 'citadel/messagesView.html', {"messages":news})
+
+@login_required
+def addMessage(request):
+    if request.method == 'POST':
+        messageForm = MessageForm(data=request.POST)
+        if messageForm.is_valid():
+            message = messageForm.save(commit=False)
+            message.poster = request.user
+            return HttpResponseRedirect("/messages/")
+        else:
+            pass
+    else:
+        messageForm = MessageForm()
+
+    # Render the template depending on the context.
+    return render(request,
+            'citadel/messagesAdd.html',
+            {'add_msg' : messageForm, 'is_logged_in':request.user.is_authenticated()} )

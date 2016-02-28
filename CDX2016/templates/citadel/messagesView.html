@@ -4,17 +4,19 @@
 
 {% block bodyblock %}
 
-    <div>
+    <div class="container content">
         {% if messages %}
             <table>
                 <tr>
                     <th>Posted by</th>
+                    <th>Title</th>
                     <th>Message</th>
                     <th>Date and time</th>
                 </tr>
                 {% for message in messages %}
                 <tr>
                     <td>{{ message.poster }}</td>
+                    <td>{{ message.title }}</td>
                     <td>{{ message.message }}</td>
                     <td>{{ message.time }}</td>
                 </tr>

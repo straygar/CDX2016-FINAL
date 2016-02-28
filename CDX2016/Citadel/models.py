@@ -33,8 +33,10 @@ class BankingDetails(models.Model):
 
 class NewsMessage(models.Model):
     poster = models.ForeignKey(User)
+    title = models.CharField(max_length=45, unique=False)
     message = models.CharField(max_length=2048, unique=False)
     time = models.DateTimeField(auto_now=True)
     def save(self, *args, **kwargs):
         self.message = removeCharactersMessage(self.message)
+        self.title = removeCharactersMessage(self.title)
         super(NewsMessage, self).save(*args, **kwargs)

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block bodyblock %}
+
+    <div class="container content">
+        {% if is_logged_in %}
+            <h2>Add a new message</h2>
+            <h3>Post a message to let your citizens know you are not a (bad) dictator after all:</h3>
+            <div class="container content">
+                <form id="msg_form" method="post" action="/messages/add-message/" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ add_msg.as_p }}
+                    <input type="submit" name="submit" value="Post message" />
+                </form>
+            </div>
+        {% else %}
+            <h2>You are not allowed to do this!</h2>
+        {% endif %}
+    </div>
+{% endblock %}
