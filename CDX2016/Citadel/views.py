@@ -127,7 +127,7 @@ def editCitizen(request, citid):
             return HttpResponseRedirect("/citizens/")
     else:
         form = CitizenForm({"name":citizen.name, "surname":citizen.surname, "Balance":citizen.Balance})
-    return render(request, "Citadel/citizenEdit.html", {"edit_c":form})
+    return render(request, "citadel/citizenEdit.html", {"edit_c":form})
 
 @login_required
 def deleteCitizens(request,citid):
@@ -136,7 +136,7 @@ def deleteCitizens(request,citid):
         return HttpResponseRedirect("/citizens/")
     else:
         citizen = BankingDetails.objects.get(id=citid)
-        return render(request, "Citadel/citizenDeleteConfirm.html", {"citizen":citizen})
+        return render(request, "citadel/citizenDeleteConfirm.html", {"citizen":citizen})
 
 @login_required
 def seeCitizens(request):
@@ -144,4 +144,4 @@ def seeCitizens(request):
     for citizen in citizens:
         citizen.name = removeCharactersName(citizen.name)
         citizen.surname = removeCharactersName(citizen.surname)
-    return render(request, "Citadel/people.html", {"citizens":citizens, "is_logged_in":request.user.is_authenticated()})
+    return render(request, "citadel/people.html", {"citizens":citizens, "is_logged_in":request.user.is_authenticated()})
