@@ -111,8 +111,10 @@ def editCitizen(request, citid):
     if request.method == "POST":
         form = CitizenForm(data=request.POST)
         if form.is_valid():
-            formData = form.save()
-            formData.save()
+            citizen.name = form.cleaned_data["name"]
+            citizen.surname = form.cleaned_data["surname"]
+            citizen.Balance = form.cleaned_data["Balance"]
+            citizen.save()
             return HttpResponseRedirect("/citizens/")
     else:
         form = CitizenForm({"name":citizen.name, "surname":citizen.surname, "Balance":citizen.Balance})
