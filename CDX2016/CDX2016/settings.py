@@ -20,10 +20,10 @@ STATIC_PATH = os.path.join(BASE_DIR,"static")
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '6fm6-f^edj**+tc$!)pi6@k3(l_im_y-d#4%*0@c18j56xrybl'
+SECRET_KEY = '=$rby71i26(j%nnl$q%fqsgbpa=_3r1=&!6pm3#5d0p390w#8e'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
 
 # session expire at browser close
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
@@ -145,6 +146,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+X_FRAME_OPTIONS = 'DENY'
 
 
 # Static files (CSS, JavaScript, Images)
