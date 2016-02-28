@@ -3,6 +3,7 @@
 {% load staticfiles %}
 
 {% block bodyblock %}
+<div class="container content">
     {% if edit_c %}
         <h1>Edit citizen</h1>
         <h5>Modify this citizen's details at your will</h5>
@@ -15,4 +16,5 @@
     {% else %}
         <p>Something has gone wrong. Please, <a href="/">press here to go to the homepage.</a></p>
     {% endif %}
+</div>
 {% endblock %}

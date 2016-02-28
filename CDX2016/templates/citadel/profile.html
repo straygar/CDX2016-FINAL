@@ -4,8 +4,7 @@
 {% load staticfiles %}
 
 {% block bodyblock %}
-    <a class="button" href="/">Home</a>
-    <a class="button" href="/logout">Log Out</a>
+<div class="content container">
     <ul>
     {% if user.is_authenticated %}
         <h1>Hello, {{name}} {{surname}}</h1>        
@@ -15,4 +14,5 @@
 
     {% endif %}
     </ul>
+</div>
 {% endblock %}

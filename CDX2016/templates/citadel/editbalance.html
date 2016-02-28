@@ -3,12 +3,15 @@
 {% load staticfiles %}
 
 {% block bodyblock %}
+<div class="content container">
 <form id="balance_form" method="post" action="/balance/" enctype="multipart/form-data">
     {% csrf_token %}
 
     {{ user_login.as_p }}
     <input type="submit" name="submit" value="Save" />
+
 </form>
+</div>
 {% endblock %}
 
 
