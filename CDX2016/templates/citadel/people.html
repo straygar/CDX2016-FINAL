@@ -22,8 +22,8 @@
                         <td>{{ citizen.name }}</td>
                         <td>{{ citizen.surname }}</td>
                         <td>{{ citizen.Balance }}</td>
-                        <td><a href="/citizens/{{ citizen.id }}/edit/">Edit</a></td>
-                        <td><a href="/citizens/{{ citizen.id }}/delete/">Delete</a></td>
+                        <td><a href="/citizens/{{ citizen.id }}/edit/" class="button">Edit</a></td>
+                        <td><a href="/citizens/{{ citizen.id }}/delete/" class="button">Delete</a></td>
                     </tr>
                     {% endfor %}
                 </table>

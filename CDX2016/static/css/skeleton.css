@@ -524,3 +524,12 @@ there.
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {}
+
+.full_button {
+    width: 100%;
+    text-align:center;
+}
+
+.full_button_inner {
+    width:50%;
+}

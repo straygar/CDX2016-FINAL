@@ -5,14 +5,13 @@
 
 {% block bodyblock %}
 <div class="content container">
-    <ul>
     {% if user.is_authenticated %}
-        <h1>Hello, {{name}} {{surname}}</h1>        
-        <br>
-        <h2>Balance: {{balance}}</h2>
-
-
+        <h1>Your profile info:</h1>
+        <p><strong>Name: </strong> {{name}}</p>
+        <p><strong>Surname: </strong> {{surname}}</p>
+        <p><strong>Email: </strong> {{email}}</p>
+        <br/>
+        <strong>Thank you for being a DodgyBank customer. If not for many like you, we wouldn't be able to control Citadel!</strong>
     {% endif %}
-    </ul>
 </div>
 {% endblock %}

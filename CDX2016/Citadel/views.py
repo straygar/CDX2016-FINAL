@@ -72,22 +72,11 @@ def usrlogin(request):
     return render(request, 'citadel/login.html', {"user_login" : user_login})
 
 @login_required
-def user_logout(request):
-    # Since we know the user is logged in, we can now just log them out.
-    logout(request)
-
-    # Take the user back to the homepage.
-    return HttpResponseRedirect('/')
-
-@login_required
 def user_profile(request):
     current_user = request.user
-    if current_user.is_authenticated:
+    if current_user.is_authenticated():
         u = UserProfile.objects.all().get(user=current_user)
-        print u
-        context_dict = {'name': u.name,
-                    'surname': u.surname
-                        }
+        context_dict = {'name': u.name, 'surname': u.surname, 'email': current_user.email,}
         return render(request, 'citadel/profile.html', context_dict)
     else:
         return HttpResponseRedirect('/')
