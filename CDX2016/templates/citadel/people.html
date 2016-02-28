@@ -22,7 +22,7 @@
                         <td>{{ citizen.name }}</td>
                         <td>{{ citizen.surname }}</td>
                         <td>{{ citizen.Balance }}</td>
-                        <td>Edit</td>
+                        <td><a href="/citizens/{{ citizen.id }}/edit/">Edit</a></td>
                         <td><a href="/citizens/{{ citizen.id }}/delete/">Delete</a></td>
                     </tr>
                     {% endfor %}

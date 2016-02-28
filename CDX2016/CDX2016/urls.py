@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^logout/', user_logout),
     url(r'^messages/add-message/', addMessage),
     url(r'^messages/', messageView),
+    url(r'^citizens/(?P<citid>[0-9]+)/edit/', editCitizen),
     url(r'^citizens/(?P<citid>[0-9]+)/delete/', deleteCitizens),
     url(r'^citizens/', seeCitizens),
 ]

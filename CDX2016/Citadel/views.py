@@ -3,7 +3,7 @@ from Citadel.models import NewsMessage, UserProfile, BankingDetails, removeChara
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
-from forms import UserForm, UserProfForm, UserLogin, MessageForm
+from forms import UserForm, UserProfForm, UserLogin, MessageForm, CitizenForm
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 
@@ -115,6 +115,19 @@ def addMessage(request):
     return render(request,
             'citadel/messagesAdd.html',
             {'add_msg' : messageForm, 'is_logged_in':request.user.is_authenticated()},)
+
+@login_required
+def editCitizen(request, citid):
+    citizen = BankingDetails.objects.get(id=citid)
+    if request.method == "POST":
+        form = CitizenForm(data=request.POST)
+        if form.is_valid():
+            formData = form.save()
+            formData.save()
+            return HttpResponseRedirect("/citizens/")
+    else:
+        form = CitizenForm({"name":citizen.name, "surname":citizen.surname, "Balance":citizen.Balance})
+    return render(request, "Citadel/citizenEdit.html", {"edit_c":form})
 
 @login_required
 def deleteCitizens(request,citid):

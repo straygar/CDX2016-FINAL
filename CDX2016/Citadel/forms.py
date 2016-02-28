@@ -32,3 +32,11 @@ class MessageForm(forms.ModelForm):
     class Meta:
         model=NewsMessage
         fields=("title", "message",)
+
+class CitizenForm(forms.ModelForm):
+    name = forms.CharField(widget=forms.TextInput(), required=True, label="Name")
+    surname = forms.CharField(widget=forms.TextInput(), required=True, label="Last name")
+    Balance = forms.DecimalField(widget=forms.NumberInput(), required=True, label="Balance")
+    class Meta:
+        model=BankingDetails
+        fields=("name", "surname", "Balance",)
