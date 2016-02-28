@@ -22,6 +22,9 @@ class UserProfile(models.Model):
 
     def save(self, *args, **kwargs):
         self.name = removeCharactersUSN(self.name)
+        if self.pk is None:
+            bd = BankingDetails(user=self, Balance=0.0)
+            bd.save()
         super(UserProfile, self).save(*args, **kwargs)
 
 class BankingDetails(models.Model):

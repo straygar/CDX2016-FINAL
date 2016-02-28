@@ -1,17 +1,18 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+
 {% load staticfiles %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/skeleton.css' %}">
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Citadel</title>
-</head>
-<body>
 {% block bodyblock %}
 
-{% endblock %}
+    <div>
+        {% if messages %}
+            <table>
+                {% for message in messages %}
 
-</body>
-</html>
+                {% endfor %}
+            </table>
+        {% else %}
+            <h3>Sorry, there are no messages!</h3>
+        {% endif %}
+    </div>
+{% endblock %}
