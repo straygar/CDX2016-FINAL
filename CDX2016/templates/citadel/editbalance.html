@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block bodyblock %}
+<form id="balance_form" method="post" action="/balance/" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ user_login.as_p }}
+    <input type="submit" name="submit" value="Save" />
+</form>
+{% endblock %}
+
+
