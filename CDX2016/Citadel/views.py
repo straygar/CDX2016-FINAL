@@ -117,6 +117,15 @@ def addMessage(request):
             {'add_msg' : messageForm, 'is_logged_in':request.user.is_authenticated()},)
 
 @login_required
+def deleteCitizens(request,citid):
+    if request.method == "POST":
+        BankingDetails.objects.get(id=citid).delete()
+        return HttpResponseRedirect("/citizens/")
+    else:
+        citizen = BankingDetails.objects.get(id=citid)
+        return render(request, "Citadel/citizenDeleteConfirm.html", {"citizen":citizen})
+
+@login_required
 def seeCitizens(request):
     citizens = BankingDetails.objects.order_by("-name")
     for citizen in citizens:

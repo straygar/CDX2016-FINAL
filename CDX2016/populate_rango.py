@@ -16,27 +16,15 @@ def readcsv():
         count = 0
         for row in reader:
             count += 1
-            templist = row[0].split(",")[1:]
-            add_user(templist[0],templist[1],Decimal(templist[2]),count)
+            if count>1:
+				templist = row[0].split(",")[1:]
+				add_user(templist[0],templist[1],Decimal(templist[2].strip()),count)
 
 
 
 def add_user(lastname,firstname,balance,count):
-    u = User()
-    usernamestring = firstname + lastname + str(count)
-    print usernamestring
-    u.username = usernamestring
-    u.password = os.urandom(15)
+    u = BankingDetails(name = firstname, surname = lastname, Balance=balance)
     u.save()
-    c = UserProfile.objects.create(user=u)
-    c.name = firstname
-    c.surname = lastname
-    print c.name
-    c.save()
-    print balance
-    b = BankingDetails.objects.create(user=c,Balance=balance)
-    b.save()
-    return True
 
 # Start execution here!
 if __name__ == '__main__':
