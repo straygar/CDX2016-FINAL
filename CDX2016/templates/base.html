@@ -24,6 +24,7 @@
 				<li><a href="/">Home</a></li>
 				<li><a href="/messages/">Message Board</a></li>
 			{% if user.is_authenticated %}
+				<li><a href="/citizens/">Manage citizens</a></li>
 				<li><a href="/profile">Profile</a></li>
 				<li><a href="/logout">Log Out</a></li>
 			{% else %}
@@ -35,7 +36,7 @@
 	</div>
 </header>
 <footer>
-	<div class="container footer	">Dodgy, insecure, slow - What a bank should be  |  &copy; Dodgybank 2016</div>
+	<div class="container footer">Dodgy, insecure, slow - What a bank should be  |  &copy; Dodgybank 2016</div>
 </footer>
 
 
