@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from forms import UserForm, UserProfForm, UserLogin
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -71,14 +72,6 @@ def usrlogin(request):
     return HttpResponseRedirect("/Citadel/")
 
 
-def user_profile(request):
-    current_user = request.user
-    u = UserProfile.objects.filter(user == current_user)
-    print u
-#    context_dict = {'profile_details' = u}
-    return render(request, 'citadel/profile.html', context_dict)
-
-
 
 @login_required
 def user_logout(request):
@@ -88,20 +81,14 @@ def user_logout(request):
     # Take the user back to the homepage.
     return HttpResponseRedirect('/')
 
-@login_required
+#@login_required
 def user_profile(request):
     current_user = request.user
     if current_user.is_authenticated:
-        print current_user
-        u = UserProfile.objects.all().filter(user = request.user)[0]
-        b = BankingDetails.objects.all().filter(user = u)[0]
-
+        u = UserProfile.objects.all().get(user=current_user)
         context_dict = {'name': u.name,
-                    'surname': u.surname,
-                    'balance': b.Balance}
-    #return render(request, 'citadel/profile.html', context_dict)
-        u = UserProfile.objects.filter(user == current_user)
-        print u
+                    'surname': u.surname
+                        }
         return render(request, 'citadel/profile.html', context_dict)
     else:
         return HttpResponseRedirect('/')
