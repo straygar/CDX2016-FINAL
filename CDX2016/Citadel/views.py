@@ -9,9 +9,7 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
-    news = NewsMessage.objects.order_by('-time')[:5]
-    context_dict = {'news': news}
-    return render(request, 'citadel/index.html', context_dict)
+    return render(request, 'citadel/index.html', {})
 
 
 @login_required
@@ -40,8 +38,6 @@ def register(request):
                 user_profile = user_prof_form.save(commit=False)
                 user_profile.user = user
                 user_profile.save()
-                bd = BankingDetails(user=user_profile, Balance=0.0)
-                bd.save()
                 registered = True
             else:
                 print user_prof_form.errors
@@ -86,7 +82,6 @@ def user_logout(request):
 #@login_required
 def user_profile(request):
     current_user = request.user
-    print current_user
     if current_user.is_authenticated:
         u = UserProfile.objects.all().get(user=current_user)
         print u
@@ -96,3 +91,7 @@ def user_profile(request):
         return render(request, 'citadel/profile.html', context_dict)
     else:
         return HttpResponseRedirect('/')
+
+def messageView(request):
+    news = NewsMessage.objects.order_by('-time')
+    return render(request, 'citadel/messagesView.html', {"messages":news})

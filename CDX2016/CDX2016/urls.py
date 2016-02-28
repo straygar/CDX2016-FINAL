@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^login/', usrlogin),
     url(r'^profile/', user_profile),
     url(r'^logout/', user_logout),
+    url(r'^messages/', messageView),
 ]
 
 urlpatterns += patterns('',

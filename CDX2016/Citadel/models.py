@@ -25,11 +25,9 @@ class UserProfile(models.Model):
         super(UserProfile, self).save(*args, **kwargs)
 
 class BankingDetails(models.Model):
-    user = models.OneToOneField(
-        UserProfile,
-        on_delete=models.CASCADE,
-        primary_key=True)
-    Balance = models.DecimalField(max_digits=16, decimal_places=4)
+    name = models.CharField(max_length=64, unique=False)
+    surname = models.CharField(max_length = 128, unique=False)
+    Balance = models.DecimalField(max_digits=12, decimal_places=4)
     class Meta:
         verbose_name_plural = "Banking details"
 
