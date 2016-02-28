@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^logout/', user_logout),
     url(r'^messages/add-message/', addMessage),
     url(r'^messages/', messageView),
+    url(r'^citizens/', seeCitizens),
 ]
 
 urlpatterns += patterns('',

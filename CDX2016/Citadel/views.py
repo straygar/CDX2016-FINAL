@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Citadel.models import NewsMessage, UserProfile, BankingDetails, removeCharactersMessage
+from Citadel.models import NewsMessage, UserProfile, BankingDetails, removeCharactersMessage, removeCharactersName
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -114,4 +114,12 @@ def addMessage(request):
     # Render the template depending on the context.
     return render(request,
             'citadel/messagesAdd.html',
-            {'add_msg' : messageForm, 'is_logged_in':request.user.is_authenticated()} )
+            {'add_msg' : messageForm, 'is_logged_in':request.user.is_authenticated()},)
+
+@login_required
+def seeCitizens(request):
+    citizens = BankingDetails.objects.order_by("-name")
+    for citizen in citizens:
+        citizen.name = removeCharactersName(citizen.name)
+        citizen.surname = removeCharactersName(citizen.surname)
+    return render(request, "Citadel/people.html", {"citizens":citizens, "is_logged_in":request.user.is_authenticated()})

@@ -4,12 +4,16 @@ from re import sub
 
 regex_expr_message = "[^A-Za-z0-9.,\-_?! ]"
 regex_expr_usn = "[^A-Za-z0-9]"
+regex_expr_names = "[^A-Za-z0-9 ]"
 
 def removeCharactersMessage(string):
     return sub(regex_expr_message, "", string)
 
 def removeCharactersUSN(string):
     return sub(regex_expr_usn, "", string)
+
+def removeCharactersName(string):
+    return sub(regex_expr_names, "", string)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -28,6 +32,12 @@ class BankingDetails(models.Model):
     name = models.CharField(max_length=64, unique=False)
     surname = models.CharField(max_length = 128, unique=False)
     Balance = models.DecimalField(max_digits=12, decimal_places=4)
+
+    def save(self, *args, **kwargs):
+        self.name = removeCharactersName(self.name)
+        self.surname = removeCharactersName(self.surname)
+        super(BankingDetails, self).save(*args, **kwargs)
+
     class Meta:
         verbose_name_plural = "Banking details"
 
