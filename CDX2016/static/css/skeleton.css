@@ -120,16 +120,79 @@ html is set to 62.5% so that all the REM measurements throughout Skeleton
 are based on 10px sizing. So basically 1.5rem = 15px :) */
 html {
   font-size: 62.5%; }
+header { 
+  position: fixed;
+  font-size: 25px;
+  font-family: QuickSand; 
+  background-color: #008aff; 
+  height: 80px;
+  width: 100%;
+  left: 0;
+  top: 0;
+  margin: auto;
+  color: white;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+}
+header a {
+	color: white;
+	text-decoration: none;
+}
+
+.navbar {
+	position: relative;
+	top: -40px;
+	float: right;
+}
+.navbar ul li:hover {
+	color: #83c6ff;
+}
+ul li {
+	display: inline-block;
+	padding-left: 30px;
+}
+#logo {
+	position: relative;
+	top: 15px;
+	height: 50px;
+}
+.safe {
+	position: relative;
+	width: 100%;
+	left: 0;
+	height: 500px;
+	display: block;
+}
+.safe img {
+	width: 100%;
+}
+.content {
+	background-color: white;
+	width: 100%;
+	height: 500px;
+}
 body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #222; }
-
+footer {
+	background:#ffab62;
+	width:100%;
+	height:100px;
+	position:absolute;
+	bottom:0;
+	left:0;
+}
 
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+@font-face {
+    font-family: QuickSand;
+    src: url(Quicksand-Regular.otf);
+}
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 2rem;
@@ -140,7 +203,6 @@ h3 { font-size: 3.0rem; line-height: 1.3;  letter-spacing: -.1rem; }
 h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem; }
 h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; }
 h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
-
 /* Larger than phablet */
 @media (min-width: 550px) {
   h1 { font-size: 5.0rem; }
@@ -158,9 +220,9 @@ p {
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #1EAEDB; }
+  color: white; }
 a:hover {
-  color: #0FA0CE; }
+  color: white; }
 
 
 /* Buttons
